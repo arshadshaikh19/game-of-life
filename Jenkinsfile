@@ -19,6 +19,9 @@ pipeline{
                         }
                 }
                 stage('Code Analysis'){
+                        tools{
+                                jdk 'java-11'
+                        }
                          
                         steps{
                             withSonarQubeEnv(credentialsId: 'sonarqube-user-token', installationName: 'Sonarqube-9.9.3') {
