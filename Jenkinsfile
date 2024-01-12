@@ -1,9 +1,6 @@
 pipeline{
 
         agent { label 'worker' }
-        tools{
-            jdk 'java-8'
-        }
 
          stages{
                 stage('Source code'){
@@ -12,6 +9,9 @@ pipeline{
                         }
                 }
                 stage('Build code'){
+                        tools{
+            jdk 'java-8'
+        }
                         steps{
                                 sh script: 'mvn package \
                                         -DskipTests'
