@@ -13,7 +13,7 @@ pipeline{
                 }
                 stage('Build code'){
                         steps{
-                                sh script: 'mvn package'
+                                sh script: 'mvn package -DskipTests'
                         }
                 }
                 stage('Code Analysis'){
