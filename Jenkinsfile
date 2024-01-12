@@ -10,8 +10,8 @@ pipeline{
                 }
                 stage('Build code'){
                         tools{
-            jdk 'java-8'
-        }
+                                jdk 'java-8'
+                        }
                         steps{
                                 sh script: 'mvn package \
                                         -DskipTests'
