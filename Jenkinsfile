@@ -1,9 +1,9 @@
 pipeline{
 
         agent { label 'worker' }
-        // tools{
-        //     jdk 'java-11'
-        // }
+        tools{
+            jdk 'java-8'
+        }
 
          stages{
                 stage('Source code'){
