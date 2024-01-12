@@ -2,9 +2,7 @@ pipeline{
 
         agent { label 'worker' }
 
-          tools{
-                                jdk 'java-8'
-                        }
+         
          stages{
                 stage('Source code'){
                         steps{
@@ -12,13 +10,18 @@ pipeline{
                         }
                 }
                 stage('Build code'){
-                
+                 tools{
+                                jdk 'java-8'
+                        }
                         steps{
                                 sh script: 'mvn package \
                                         -DskipTests'
                         }
                 }
                 stage('Code Analysis'){
+                         tools{
+                                jdk 'java-17'
+                        }
                         steps{
                             withSonarQubeEnv(credentialsId: 'sonarqube-user-token', installationName: 'Sonarqube-9.9.3') {
                                 // some block
