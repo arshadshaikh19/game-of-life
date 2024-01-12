@@ -2,6 +2,9 @@ pipeline{
 
         agent { label 'worker' }
 
+          tools{
+                                jdk 'java-8'
+                        }
          stages{
                 stage('Source code'){
                         steps{
@@ -9,26 +12,24 @@ pipeline{
                         }
                 }
                 stage('Build code'){
-                        tools{
-                                jdk 'java-8'
-                        }
+                
                         steps{
                                 sh script: 'mvn package \
                                         -DskipTests'
                         }
                 }
-                // stage('Code Analysis'){
-                //         steps{
-                //             withSonarQubeEnv(credentialsId: 'sonarqube-user-token', installationName: 'Sonarqube-9.9.3') {
-                //                 // some block
-                //                 sh script: 'mvn clean verify sonar:sonar \
-                //                     -DskipTests \
-                //                     -Dsonar.projectKey=springpet-clinic \
-                //                     -Dsonar.host.url=http://34.131.143.64:9000 \
-                //                     -Dsonar.login=sqp_e2f726f25b10f826720a0f46fd50d7bfab612e31'
-                //             }
-                //         }
-                // }
+                stage('Code Analysis'){
+                        steps{
+                            withSonarQubeEnv(credentialsId: 'sonarqube-user-token', installationName: 'Sonarqube-9.9.3') {
+                                // some block
+                                sh script: 'mvn clean verify sonar:sonar \
+                                    -DskipTests \
+                                    -Dsonar.projectKey=springpet-clinic \
+                                    -Dsonar.host.url=http://34.131.143.64:9000 \
+                                    -Dsonar.login=sqp_e2f726f25b10f826720a0f46fd50d7bfab612e31'
+                            }
+                        }
+                }
                 //  stage('Artifact'){
                 //         steps{
                 //                 dir('/home/my/workspace/Springpet/target'){
